@@ -15,6 +15,14 @@ export default class YesInEurope extends Component {
 			markedDates: {}
 		}
 	}
+	onDayPress(day) {
+		const markedDates = Object.assign({}, this.state.markedDates)
+	        markedDates[day.dateString]= {selected: true,  color: 'green'}
+    		console.log(markedDates);
+    		this.setState({
+    			markedDates: markedDates
+    		})
+	}
 
 	render() {
 	const marked={}
@@ -57,12 +65,10 @@ export default class YesInEurope extends Component {
   minDate={this.props.navigation.state.params.start}
   maxDate={this.props.navigation.state.params.today}
   futureScrollRange={6}
-  onDayPress={(day) => { marked[day.dateString]= {selected: true,  color: 'green'}
-  						 console.log(marked)
-						}}
+  onDayPress={(day) => {this.onDayPress(day)}}
 markingType={'period'}
  monthFormat={'MMMM yyyy'}
- markedDates={marked}
+ markedDates={this.state.markedDates}
   // Handler which gets executed when visible month changes in calendar. Default = undefined
  
 />
